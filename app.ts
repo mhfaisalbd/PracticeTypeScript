@@ -11,7 +11,9 @@ function Add(num1: number, num2: number, checked: boolean, phrase: string) {
     }
 }
 
-const a = /*"12"*/ 12;
+let a: number;
+//a = "12";
+a = 12;
 const b = 14.141;
 const checkedType = !(typeof a !== "number" || typeof b !== "number");
 
