@@ -1,17 +1,17 @@
-type Combinable = number | string;
-type ResultDiscriber = "text" | "number";
-function combine(
-        input1: Combinable, 
-        input2: Combinable,
-        resultType: ResultDiscriber
-    ) {
-    if(typeof input1 === 'number'&& typeof input2 === 'number' || resultType === "number")
-        return +input1 + +input2;
-    return input1.toString().concat( ' ', input2.toString());
+function Add(inputA:number, inputB: number) /*: number*/ {
+    return inputA + inputB;
 }
 
-console.log(combine(100, 130, "number"));
-console.log(combine("Ariana", "Marie", "text"));
 
-console.log(combine(100, 130, "text"));
-console.log(combine("Leah", "Gotti", "number"));
+//Valided void type where haven't requrie of return statement
+function PrintResult(input:number): void {
+    console.log("The result is: "+input);
+}
+
+//undefined requires at least any of return statement
+function PrintResultAndReturn(input:number): undefined {
+    console.log("The result is: "+input);
+    return;
+}
+
+console.log(PrintResult(Add(12, 14)));
