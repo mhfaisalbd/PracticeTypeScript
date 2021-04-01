@@ -1,20 +1,15 @@
-function Add(num1: number, num2: number, checked: boolean, phrase: string) {
-    // if(typeof num1 !== "number" || typeof num2 !== "number"){
-    //     throw new Error("Unknown Type!");
-    // }
-    let result = num1 + num2;
-    if(checked){
-        console.log(phrase + result);
-    }
-    else{
-        return result;
-    }
+// const student: {
+//     name: string;
+//     regNo: number;
+//     id: number;
+//     isCurrent: boolean;
+// }
+
+const student = {
+    name : "Hasan",
+    regNo: 6530,
+    id: 1602038,
+    isCurrent: true
 }
 
-let a: number;
-//a = "12";
-a = 12;
-const b = 14.141;
-const checkedType = !(typeof a !== "number" || typeof b !== "number");
-
-Add(a, b, checkedType, "Result is: ");
+console.log(student.name);
