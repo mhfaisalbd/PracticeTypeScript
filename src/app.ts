@@ -20,3 +20,18 @@ btn?.addEventListener('click', event => console.log(event));
 
 printOut(add(12));
 // printOut(addAlternate(12)); //by default function signature is orderd arguments. So it will replace defined default value!
+
+let os = ["Windows", "Ubuntu", "Mint", "Macintosh"];
+let moreOs = ["Ubuntu MATE", "Android", "ChromeOS"];
+moreOs.push(...os);
+
+console.log(moreOs);
+let OsUser = {
+    userName: "Veronica",
+    operatingSystem : os[0],
+    haveGUI: true
+}
+
+let alterneteUser = {...OsUser};
+
+console.log(alterneteUser);
