@@ -26,6 +26,7 @@ let moreOs = ["Ubuntu MATE", "Android", "ChromeOS"];
 moreOs.push(...os);
 
 console.log(moreOs);
+console.log(...os);
 let OsUser = {
     userName: "Veronica",
     operatingSystem : os[0],
@@ -35,3 +36,11 @@ let OsUser = {
 let alterneteUser = {...OsUser};
 
 console.log(alterneteUser);
+
+const addUnlimited = (...numbers: number[]) => {
+    return numbers.reduce((a, b)=> {
+        return a + b;
+    }, 0);
+};
+
+console.log(addUnlimited(10,20,11,21,22,33,27));
