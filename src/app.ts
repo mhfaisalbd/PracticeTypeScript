@@ -44,3 +44,11 @@ const addUnlimited = (...numbers: number[]) => {
 };
 
 console.log(addUnlimited(10,20,11,21,22,33,27));
+
+const [os1, os2, os3, ...remainingOs] = moreOs;
+
+console.log(os1, os3, remainingOs);
+console.log(moreOs);
+
+const {userName: osUserName, haveGUI} = alterneteUser;
+console.log(osUserName, haveGUI);
