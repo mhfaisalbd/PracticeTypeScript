@@ -6,4 +6,10 @@ userInput = "Leah";
 
 if(typeof userInput === 'string') userName = userInput;
 
-console.log(userName);
+function GenerateError(message:string, code: number) /*: never*/ {
+    throw {message: message, errorCode: code};
+    //while(true){};
+}
+
+let result = GenerateError("WTF!!!", 404 );
+console.log(result);
