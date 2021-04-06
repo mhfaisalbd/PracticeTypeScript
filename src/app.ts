@@ -19,12 +19,47 @@ class OperatingSystem {
 
 }
 
-const windows10 = new OperatingSystem( "w10", "Windows 10");
+class Windows extends OperatingSystem{
+    
+    constructor(id: string, public version: string) {
+        super(id, `Windows ${version}`);
+        
+    }
+}
+
+class User  {
+    
+    constructor(public userName: string, private password: string) {
+        
+        
+    }
+}
+
+class Linux extends OperatingSystem{
+    
+    private users: User[];
+    constructor(id: string, public IsGui: boolean) {
+        super(id, "Ubuntu 20.04");
+        this.users = [new User('su', '1234')];
+    }
+    addUser(userName: string, password: string){
+        this.users.push(new User(userName, password));
+    }
+
+    listUser(){
+        console.log(this.users.length);
+        console.log(...this.users);
+    }
+}
+
+const windows10 = new Windows( "w10", "10 Enterprise");
 windows10.printOS();
 // windows10.task[2] = "Browser"; //Error Detected!
 windows10.addTask("Browser");
 windows10.addTask("ConsoleApp");
 windows10.getRunningTasks();
+console.log(windows10);
 
-// const ubuntu = { name: "Ubuntu 20.4", printOS : windows10.printOS };
-// ubuntu.printOS();
+const ubuntu = new Linux("u20", true);
+ubuntu.listUser();
+console.log(ubuntu);
