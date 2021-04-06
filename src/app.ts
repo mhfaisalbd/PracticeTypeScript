@@ -1,5 +1,6 @@
 class OperatingSystem {
     
+    static processorArchetecture = "x64";
     protected tasks : string[];
     constructor(private readonly id: string, public name: string){
         this.tasks = [];
@@ -7,13 +8,13 @@ class OperatingSystem {
 
     printOS(this: OperatingSystem){
         //this.id  = "1128"; //Error Detected!
-        console.log(`${this.id}: ${this.name}`);
+        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture}`);
     }
     addTask(tName: string){
         this.tasks.push(tName);
     }
     getRunningTasks(){
-        console.log(this.tasks.length);
+        console.log(this.tasks.length, Windows.processorArchetecture);
         console.log(...this.tasks);
     }
 
@@ -29,6 +30,7 @@ class Windows extends OperatingSystem{
         if(this.tasks.find((tn)=> tn === tName) === undefined)
         this.tasks.push(tName);
     }
+    
 
 }
 
