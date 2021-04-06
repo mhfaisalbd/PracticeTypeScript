@@ -20,7 +20,8 @@ abstract class OperatingSystem {
 class Windows extends OperatingSystem{
     
     
-    constructor(id: string, public version: string) {
+    static instance : Windows
+    private constructor(id: string, public version: string) {
         super(id, `Windows ${version}`);
         
     }
@@ -31,7 +32,13 @@ class Windows extends OperatingSystem{
         if(this.tasks.find((tn)=> tn === tName) === undefined)
         this.tasks.push(tName);
     }
-    
+    static get_Instance(){
+        if(Windows.instance){
+            return this.instance;
+        }
+        this.instance = new Windows('w10', "Server 2019");
+        return this.instance;
+    }
 
 }
 
@@ -80,14 +87,15 @@ class Linux extends OperatingSystem{
     }
 }
 
-const windows10 = new Windows( "w10", "10 Enterprise");
+const windows10 = Windows.get_Instance();
 windows10.printOS();
 // windows10.task[2] = "Browser"; //Error Detected!
 windows10.addTask("Browser");
 windows10.addTask("ConsoleApp");
 windows10.addTask("Browser");
 windows10.getRunningTasks();
-console.log(windows10);
+const windows10V2 = Windows.get_Instance();
+console.log(windows10, windows10V2);
 
 const ubuntu = new Linux("u20", true);
 ubuntu.printOS();
