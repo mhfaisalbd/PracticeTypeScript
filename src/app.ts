@@ -1,13 +1,12 @@
 class OperatingSystem {
-    /*public*/ name : string;
+    
     private tasks : string[];
-    constructor(n: string){
-        this.name = n;
+    constructor(private id: string, public name: string){
         this.tasks = [];
     }
 
     printOS(this: OperatingSystem){
-        console.log(this.name);
+        console.log(`${this.id}: ${this.name}`);
     }
     addTask(tName: string){
         this.tasks.push(tName);
@@ -19,7 +18,7 @@ class OperatingSystem {
 
 }
 
-const windows10 = new OperatingSystem("Windows 10");
+const windows10 = new OperatingSystem( "w10", "Windows 10");
 windows10.printOS();
 // windows10.task[2] = "Browser"; //Error Detected!
 windows10.addTask("Browser");
