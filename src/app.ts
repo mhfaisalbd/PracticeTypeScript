@@ -43,12 +43,28 @@ class User  {
 class Linux extends OperatingSystem{
     
     private users: User[];
+    private lastUser: User;
+    get recentUser(){
+        if(this.lastUser)
+            return this.lastUser;
+        else{
+            throw new Error("User Undefined!");
+            
+        }
+    }
+    set recentUser(last: User){
+        this.lastUser = last;
+    }
     constructor(id: string, public IsGui: boolean) {
         super(id, "Ubuntu 20.04");
-        this.users = [new User('su', '1234')];
+        let seedUser = new User('su', '1234');
+        this.users = [seedUser];
+        this.lastUser = seedUser;
     }
     addUser(userName: string, password: string){
-        this.users.push(new User(userName, password));
+        let user = new User(userName, password);
+        this.users.push(user);
+        this.recentUser = user;
     }
 
     listUser(){
@@ -69,3 +85,6 @@ console.log(windows10);
 const ubuntu = new Linux("u20", true);
 ubuntu.listUser();
 console.log(ubuntu);
+ubuntu.addUser("trtizle", "trt");
+ubuntu.recentUser = new User("admin", "admin");
+console.log(ubuntu.recentUser);
