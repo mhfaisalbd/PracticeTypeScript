@@ -1,6 +1,6 @@
 class OperatingSystem {
     
-    private tasks : string[];
+    protected tasks : string[];
     constructor(private readonly id: string, public name: string){
         this.tasks = [];
     }
@@ -25,6 +25,11 @@ class Windows extends OperatingSystem{
         super(id, `Windows ${version}`);
         
     }
+    addTask(tName: string){
+        if(this.tasks.find((tn)=> tn === tName) === undefined)
+        this.tasks.push(tName);
+    }
+
 }
 
 class User  {
@@ -57,6 +62,7 @@ windows10.printOS();
 // windows10.task[2] = "Browser"; //Error Detected!
 windows10.addTask("Browser");
 windows10.addTask("ConsoleApp");
+windows10.addTask("Browser");
 windows10.getRunningTasks();
 console.log(windows10);
 
