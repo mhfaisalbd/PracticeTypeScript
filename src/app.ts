@@ -1,15 +1,12 @@
-class OperatingSystem {
+abstract class OperatingSystem {
     
     static processorArchetecture = "x64";
     protected tasks : string[];
-    constructor(private readonly id: string, public name: string){
+    constructor(protected readonly id: string, public name: string){
         this.tasks = [];
     }
 
-    printOS(this: OperatingSystem){
-        //this.id  = "1128"; //Error Detected!
-        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture}`);
-    }
+    abstract printOS(this: OperatingSystem): void;
     addTask(tName: string){
         this.tasks.push(tName);
     }
@@ -22,9 +19,13 @@ class OperatingSystem {
 
 class Windows extends OperatingSystem{
     
+    
     constructor(id: string, public version: string) {
         super(id, `Windows ${version}`);
         
+    }
+    printOS(this: Windows): void {
+        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture}`);
     }
     addTask(tName: string){
         if(this.tasks.find((tn)=> tn === tName) === undefined)
@@ -44,6 +45,7 @@ class User  {
 
 class Linux extends OperatingSystem{
     
+    
     private users: User[];
     private lastUser: User;
     get recentUser(){
@@ -62,6 +64,9 @@ class Linux extends OperatingSystem{
         let seedUser = new User('su', '1234');
         this.users = [seedUser];
         this.lastUser = seedUser;
+    }
+    printOS(this: Linux): void {
+        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture} ${this.IsGui}`);
     }
     addUser(userName: string, password: string){
         let user = new User(userName, password);
@@ -85,6 +90,7 @@ windows10.getRunningTasks();
 console.log(windows10);
 
 const ubuntu = new Linux("u20", true);
+ubuntu.printOS();
 ubuntu.listUser();
 console.log(ubuntu);
 ubuntu.addUser("trtizle", "trt");
