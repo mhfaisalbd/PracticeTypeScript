@@ -1,11 +1,12 @@
 class OperatingSystem {
     
     private tasks : string[];
-    constructor(private id: string, public name: string){
+    constructor(private readonly id: string, public name: string){
         this.tasks = [];
     }
 
     printOS(this: OperatingSystem){
+        //this.id  = "1128"; //Error Detected!
         console.log(`${this.id}: ${this.name}`);
     }
     addTask(tName: string){
