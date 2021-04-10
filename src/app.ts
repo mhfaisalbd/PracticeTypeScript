@@ -1,106 +1,50 @@
-abstract class OperatingSystem {
-    
-    static processorArchetecture = "x64";
-    protected tasks : string[];
-    constructor(protected readonly id: string, public name: string){
-        this.tasks = [];
-    }
+interface Hack {
+    targetSite: string;
+    status : "Hacked" | "In Progress" | "Scheduled";
 
-    abstract printOS(this: OperatingSystem): void;
-    addTask(tName: string){
-        this.tasks.push(tName);
-    }
-    getRunningTasks(){
-        console.log(this.tasks.length, Windows.processorArchetecture);
-        console.log(...this.tasks);
-    }
-
+    hack(callBack: ()=> void) : void;
 }
 
-class Windows extends OperatingSystem{
-    
-    
-    static instance : Windows
-    private constructor(id: string, public version: string) {
-        super(id, `Windows ${version}`);
+class FacebookHack implements Hack{
+    targetSite: string;
+    hackerName : string;
+    hackerIP : string;
+    status: "Hacked" | "In Progress" | "Scheduled";
+    hack(callBack: () => void): void {
         
+        callBack();
     }
-    printOS(this: Windows): void {
-        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture}`);
+
+    constructor(n: string, ip: string){
+        this.targetSite = "https://facebook.com";
+        this.status = "Scheduled";
+        this.hackerName = n;
+        this.hackerIP = ip;
     }
-    addTask(tName: string){
-        if(this.tasks.find((tn)=> tn === tName) === undefined)
-        this.tasks.push(tName);
-    }
-    static get_Instance(){
-        if(Windows.instance){
-            return this.instance;
-        }
-        this.instance = new Windows('w10', "Server 2019");
-        return this.instance;
-    }
+
+
 
 }
 
-class User  {
-    
-    constructor(public userName: string, private password: string) {
-        
-        
+const hack: Hack = {
+    targetSite : "https://mail.google.com",
+    status : "In Progress",
+    hack(){
+        console.log(status +" :: at "+Date());
     }
 }
 
-class Linux extends OperatingSystem{
-    
-    
-    private users: User[];
-    private lastUser: User;
-    get recentUser(){
-        if(this.lastUser)
-            return this.lastUser;
-        else{
-            throw new Error("User Undefined!");
-            
-        }
+hack.hack(()=> {
+    if(hack.status === "Hacked"){
+        console.log("Done!");
     }
-    set recentUser(last: User){
-        this.lastUser = last;
-    }
-    constructor(id: string, public IsGui: boolean) {
-        super(id, "Ubuntu 20.04");
-        let seedUser = new User('su', '1234');
-        this.users = [seedUser];
-        this.lastUser = seedUser;
-    }
-    printOS(this: Linux): void {
-        console.log(`${this.id}: ${this.name} ${OperatingSystem.processorArchetecture} ${this.IsGui}`);
-    }
-    addUser(userName: string, password: string){
-        let user = new User(userName, password);
-        this.users.push(user);
-        this.recentUser = user;
-    }
+});
 
-    listUser(){
-        console.log(this.users.length);
-        console.log(...this.users);
+let fHack : Hack;
+fHack = new FacebookHack("Gorilla", "120.103.27.110");
+
+fHack.hack(()=>{
+    if(hack.status === "Hacked"){
+        console.log("Done!");
     }
-}
-
-const windows10 = Windows.get_Instance();
-windows10.printOS();
-// windows10.task[2] = "Browser"; //Error Detected!
-windows10.addTask("Browser");
-windows10.addTask("ConsoleApp");
-windows10.addTask("Browser");
-windows10.getRunningTasks();
-const windows10V2 = Windows.get_Instance();
-console.log(windows10, windows10V2);
-
-const ubuntu = new Linux("u20", true);
-ubuntu.printOS();
-ubuntu.listUser();
-console.log(ubuntu);
-ubuntu.addUser("trtizle", "trt");
-ubuntu.recentUser = new User("admin", "admin");
-console.log(ubuntu.recentUser);
+})
