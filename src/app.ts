@@ -1,3 +1,14 @@
+interface MultiPly{
+    (numA: number, numB: number) : number;
+}
+
+let mul: MultiPly;
+mul = (n1: number, n2: number) => {
+    return n1 * n2;
+}
+
+console.log(mul(8, 9));
+
 interface TergetingSite{
     targetSite: string;
 }
