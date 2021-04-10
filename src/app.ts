@@ -1,17 +1,29 @@
-interface Hack {
+interface TergetingSite{
     targetSite: string;
+}
+interface HackStatus{
     status : "Hacked" | "In Progress" | "Scheduled";
+
+}
+interface Hack extends TergetingSite, HackStatus {
 
     hack(callBack: ()=> void) : void;
 }
-
-class FacebookHack implements Hack{
-    targetSite: string;
+interface HackerInfo{
     hackerName : string;
     hackerIP : string;
+}
+class FacebookHack implements Hack, HackerInfo{
+    targetSite: string;
+    
+    hackerName: string;
+    hackerIP: string;
+
     status: "Hacked" | "In Progress" | "Scheduled";
     hack(callBack: () => void): void {
         
+        this.status = "Hacked";
+        console.log(this.status +" :: at "+Date());
         callBack();
     }
 
@@ -22,15 +34,13 @@ class FacebookHack implements Hack{
         this.hackerIP = ip;
     }
 
-
-
 }
 
 const hack: Hack = {
     targetSite : "https://mail.google.com",
     status : "In Progress",
     hack(){
-        console.log(status +" :: at "+Date());
+        console.log(this.status +" :: at "+Date());
     }
 }
 
@@ -44,7 +54,7 @@ let fHack : Hack;
 fHack = new FacebookHack("Gorilla", "120.103.27.110");
 
 fHack.hack(()=>{
-    if(hack.status === "Hacked"){
+    if(fHack.status === "Hacked"){
         console.log("Done!");
     }
-})
+});
